@@ -70,12 +70,7 @@ dnf -y install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo "${yellow}Install some app...${reset}"
-dnf -y install neofetch
-dnf -y install btop
-dnf -y install cava
-dnf -y install cmatrix
-dnf -y install cbonsai
-dnf -y install jetbrains-mono-fonts-all
+dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all
 flatpak -y install flathub org.videolan.VLC
 flatpak -y install flathub com.spotify.Client
 flatpak -y install flathub tv.plex.PlexDesktop

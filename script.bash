@@ -46,14 +46,12 @@ chmod +x ./dotnet-install.sh
 ./dotnet-install.sh --version latest --runtime aspnetcore
 rm -rf ./dotnet-install.sh
 
-echo "${yellow}Install NodeJs...${reset}"
-dnf -y install nodejs-1:18
-
 mkdir ~/.config/
 
 echo "${yellow}Install kitty...${reset}"
 dnf -y install kitty
-cp -r kitty ~/.config/
+mkdir -p ~/.config/kitty
+cp -r ./kitty/kitty.conf ~/.config/kitty/kitty.conf
 
 echo "${yellow}Install zsh...${reset}"
 dnf -y install zsh
@@ -83,7 +81,7 @@ dnf -y install input-remapper
 systemctl enable --now input-remapper
 
 echo "${yellow}Install some app...${reset}"
-dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all
+dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger
 flatpak -y install flathub org.videolan.VLC
 flatpak -y install flathub com.spotify.Client
 flatpak -y install flathub tv.plex.PlexDesktop
@@ -93,11 +91,6 @@ flatpak -y install flathub com.jetbrains.Rider
 flatpak -y install flathub org.qbittorrent.qBittorrent
 flatpak -y install flathub com.anydesk.Anydesk
 flatpak -y install flathub com.visualstudio.code
-
-echo "${yellow}Btop config...${reset}"
-git clone https://github.com/rose-pine/btop.git
-cp btop/*.theme ~/.config/btop/themes/
-rm -rf btop
 
 echo "${yellow}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 red=$(tput setaf 3)
 reset=$(tput sgr0)
 
@@ -64,6 +66,7 @@ cp .zshrc ~/
 
 echo "${yellow}Git config...${reset}"
 cp .gitconfig ~/
+cp .git-credentials ~/
 
 echo "${yellow}Install Flatpak...${reset}"
 dnf -y install flatpak

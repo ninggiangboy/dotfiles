@@ -83,5 +83,10 @@ flatpak -y install flathub org.qbittorrent.qBittorrent
 flatpak -y install flathub com.anydesk.Anydesk
 flatpak -y install flathub com.visualstudio.code
 
+echo "${yellow}Btop config...${reset}"
+git clone https://github.com/rose-pine/btop.git
+cp btop/*.theme ~/.config/btop/themes/
+rm -rf btop
+
 echo "${yellow}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop

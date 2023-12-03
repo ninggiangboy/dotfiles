@@ -10,6 +10,9 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+echo "${yellow}Time config...${reset}"
+timedatectl set-local-rtc 1
+
 echo "${yellow}Dnf config...${reset}"
 echo "fastestmirror=true" >> /etc/dnf/dnf.conf
 echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
@@ -70,6 +73,14 @@ cp .gitconfig ~/
 echo "${yellow}Install Flatpak...${reset}"
 dnf -y install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+echo "${yellow}Install ibus...${reset}"
+dnf config-manager --add-repo https://download.opensuse.org/repositories/home:lamlng/Fedora_39/home:lamlng.repo
+dnf -y install ibus-bamboo
+
+echo "${yellow}Install Input Remapper ...${reset}"
+dnf -y install input-remapper
+systemctl enable --now input-remapper
 
 echo "${yellow}Install some app...${reset}"
 dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all

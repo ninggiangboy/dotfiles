@@ -66,7 +66,6 @@ cp .zshrc ~/
 
 echo "${yellow}Git config...${reset}"
 cp .gitconfig ~/
-cp .git-credentials ~/
 
 echo "${yellow}Install Flatpak...${reset}"
 dnf -y install flatpak

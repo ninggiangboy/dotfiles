@@ -34,6 +34,16 @@ systemctl enable docker
 systemctl restart docker
 sudo chmod 666 /var/run/docker.sock
 
+echo "${yellow}Install .Net...${reset}"
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+chmod +x ./dotnet-install.sh
+./dotnet-install.sh --version latest
+./dotnet-install.sh --version latest --runtime aspnetcore
+rm -rf ./dotnet-install.sh
+
+echo "${yellow}Install NodeJs...${reset}"
+dnf -y install nodejs-1:18
+
 mkdir ~/.config/
 
 echo "${yellow}Install kitty...${reset}"

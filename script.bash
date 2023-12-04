@@ -40,11 +40,7 @@ systemctl restart docker
 sudo chmod 666 /var/run/docker.sock
 
 echo "${yellow}Install .Net...${reset}"
-wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-chmod +x ./dotnet-install.sh
-./dotnet-install.sh --version latest
-./dotnet-install.sh --version latest --runtime aspnetcore
-rm -rf ./dotnet-install.sh
+sudo dnf install dotnet-sdk-7.0
 
 mkdir ~/.config/
 

@@ -1,10 +1,5 @@
 [safe]
-	directory = /mnt/Workspace/code/back-end/java/base_projec
-	directory = /mnt/Workspace/code/back-end/java/base_project
-	directory = /mnt/Workspace/code/back-end/java/blog
-	directory = /mnt/Workspace/code/back-end/java/blog_server
-	directory = /mnt/Workspace/code/back-end/java/auth_service
-	directory = /mnt/Workspace/Other/Code/Java/dictionary
+	directory = /mnt/Workspace/code/*
 [user]
 	email = ninggiangboy@gmail.com
 	name = duykhanh

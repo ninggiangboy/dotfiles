@@ -42,17 +42,18 @@ sudo chmod 666 /var/run/docker.sock
 echo "${yellow}Install .Net...${reset}"
 sudo dnf install dotnet-sdk-7.0
 
-mkdir ~/.config/
+mkdir $HOME/.config/
 
 echo "${yellow}Install kitty...${reset}"
 dnf -y install kitty
-mkdir -p ~/.config/kitty
-cp -r ./kitty/kitty.conf ~/.config/kitty/kitty.conf
+mkdir -p $HOME/.config/kitty
+cp -r $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
 
 echo "${yellow}Install zsh...${reset}"
 dnf -y install zsh
 chsh -s $(which zsh)
-
+echo "${yellow}Install oh-my-zsh...${reset}"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 echo "${yellow}Install zsh plugins...${reset}"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
@@ -85,6 +86,3 @@ for name in .gitconfig .zshrc; do
     cp $PWD/$name $HOME/$name
   fi
 done
-
-echo "${yellow}Install oh-my-zsh...${reset}"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

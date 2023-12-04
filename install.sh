@@ -57,7 +57,7 @@ cp -r $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
 
 echo "${color}Install zsh...${reset}"
 dnf -y install zsh >> .log
-chsh -s $(which zsh)
+chsh -s -y $(which zsh)
 echo "${color}Install oh-my-zsh...${reset}"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 echo "${color}Install zsh plugins...${reset}"

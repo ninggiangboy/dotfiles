@@ -52,17 +52,11 @@ cp -r ./kitty/kitty.conf ~/.config/kitty/kitty.conf
 echo "${yellow}Install zsh...${reset}"
 dnf -y install zsh
 chsh -s $(which zsh)
-echo "${yellow}Install oh-my-zsh...${reset}"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo "${yellow}Install zsh plugins...${reset}"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
-cp .zshrc ~/
-
-echo "${yellow}Git config...${reset}"
-cp .gitconfig ~/
 
 echo "${yellow}Install Flatpak...${reset}"
 dnf -y install flatpak
@@ -81,12 +75,16 @@ dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all range
 flatpak -y install flathub org.videolan.VLC
 flatpak -y install flathub com.spotify.Client
 flatpak -y install flathub tv.plex.PlexDesktop
-flatpak -y install flathub com.getpostman.Postman
-flatpak -y install flathub com.jetbrains.IntelliJ-IDEA-Ultimate
-flatpak -y install flathub com.jetbrains.Rider
 flatpak -y install flathub org.qbittorrent.qBittorrent
-flatpak -y install flathub com.anydesk.Anydesk
-flatpak -y install flathub com.visualstudio.code
 
 echo "${yellow}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop
+
+for name in .gitconfig .zshrc; do
+  if [ ! -d "$name" ]; then
+    cp $PWD/$name $HOME/$name
+  fi
+done
+
+echo "${yellow}Install oh-my-zsh...${reset}"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

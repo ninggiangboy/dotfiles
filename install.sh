@@ -22,22 +22,22 @@ echo "${color}Update and upgrade system...${reset}"
 dnf -y update && dnf -y upgrade 
 
 echo "${color}Install Docker...${reset}"
-#dnf -y remove docker \
-#    docker-client \
-#    docker-client-latest \
-#    docker-common \
-#    docker-latest \
-#    docker-latest-logrotate \
-#    docker-logrotate \
-#    docker-selinux \
-#    docker-engine-selinux \
-#    docker-engine 
-#dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo 
-#dnf -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 
-#systemctl start docker
-#systemctl enable docker
-#systemctl restart docker
-#sudo chmod 666 /var/run/docker.sock
+dnf -y remove docker \
+   docker-client \
+   docker-client-latest \
+   docker-common \
+   docker-latest \
+   docker-latest-logrotate \
+   docker-logrotate \
+   docker-selinux \
+   docker-engine-selinux \
+   docker-engine 
+dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo 
+dnf -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 
+systemctl start docker
+systemctl enable docker
+systemctl restart docker
+chmod 777 /var/run/docker.sock
 
 echo "${color}Install VSCode...${reset}"
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -54,17 +54,6 @@ echo "${color}Install kitty...${reset}"
 dnf -y install kitty 
 mkdir -p $HOME/.config/kitty
 cp -r $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
-
-echo "${color}Install zsh...${reset}"
-#dnf -y install util-linux-user >> log
-#dnf -y install zsh 
-#chsh -s -y $(which zsh)
-echo "${color}Install oh-my-zsh...${reset}"
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-echo "${color}Install zsh plugins...${reset}"
-#git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-#git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 
 echo "${color}Install Flatpak...${reset}"
 dnf -y install flatpak
@@ -87,6 +76,16 @@ flatpak -y install flathub org.qbittorrent.qBittorrent
 
 echo "${color}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop 
+
+echo "${color}Install zsh...${reset}"
+dnf -y install zsh 
+echo "${color}Install oh-my-zsh...${reset}"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "${color}Install zsh plugins...${reset}"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 
 for name in .gitconfig .zshrc; do
   if [ ! -d "$name" ]; then

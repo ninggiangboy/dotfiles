@@ -68,7 +68,7 @@ dnf -y install input-remapper
 systemctl enable --now input-remapper
 
 echo "${color}Install some app...${reset}"
-dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger 
+dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger gnome-tweaks
 flatpak -y install flathub org.videolan.VLC 
 flatpak -y install flathub com.spotify.Client 
 flatpak -y install flathub tv.plex.PlexDesktop 
@@ -87,10 +87,16 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugi
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
 
+echo "${color}Copy config file...${reset}"
 for name in .gitconfig .zshrc; do
   if [ ! -d "$name" ]; then
     cp -r $PWD/$name $HOME/$name
   fi
 done
+
+echo "${color}Install themes...${reset}"
+./Nordzy-icon/install.sh
+mkdir -p ~/.local/share/themes/
+cp -r $PWD/adw-gtk3v5-2/* $HOME/.local/share/themes/
 
 echo "${color}Done.${reset}"

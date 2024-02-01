@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 color=$(tput setaf 3) # yellow
 reset=$(tput sgr0)
 
@@ -37,7 +35,8 @@ dnf -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker
 systemctl start docker
 systemctl enable docker
 systemctl restart docker
-chmod 777 /var/run/docker.sock
+usermod -a -G docker $USER
+# chmod 777 /var/run/docker.sock
 
 echo "${color}Install VSCode...${reset}"
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -48,12 +47,8 @@ dnf -y install code
 echo "${color}Install .Net...${reset}"
 dnf -y install dotnet-sdk-7.0 
 
-mkdir -p $HOME/.config
-
 echo "${color}Install kitty...${reset}"
 dnf -y install kitty 
-mkdir -p $HOME/.config/kitty
-cp -r $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
 
 echo "${color}Install Flatpak...${reset}"
 dnf -y install flatpak
@@ -69,34 +64,11 @@ systemctl enable --now input-remapper
 
 echo "${color}Install some app...${reset}"
 dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger gnome-tweaks
-flatpak -y install flathub org.videolan.VLC 
 flatpak -y install flathub com.spotify.Client 
 flatpak -y install flathub tv.plex.PlexDesktop 
-flatpak -y install flathub org.qbittorrent.qBittorrent 
+flatpak -y install flathub org.videolan.VLC
 
 echo "${color}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop 
-
-echo "${color}Install zsh...${reset}"
-dnf -y install zsh 
-echo "${color}Install oh-my-zsh...${reset}"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-echo "${color}Install zsh plugins...${reset}"
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
-
-echo "${color}Copy config file...${reset}"
-for name in .gitconfig .zshrc; do
-  if [ ! -d "$name" ]; then
-    cp -r $PWD/$name $HOME/$name
-  fi
-done
-
-echo "${color}Install themes...${reset}"
-./Nordzy-icon/install.sh
-mkdir -p ~/.local/share/themes/
-cp -r $PWD/adw-gtk3v5-2/* $HOME/.local/share/themes/
 
 echo "${color}Done.${reset}"

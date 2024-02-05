@@ -36,7 +36,7 @@ systemctl start docker
 systemctl enable docker
 systemctl restart docker
 usermod -a -G docker $USER
-# chmod 777 /var/run/docker.sock
+chmod 777 /var/run/docker.sock
 
 echo "${color}Install VSCode...${reset}"
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -62,11 +62,19 @@ echo "${color}Install Input Remapper ...${reset}"
 dnf -y install input-remapper
 systemctl enable --now input-remapper
 
+
+echo "${color}Install Table Plus...${reset}"
+rpm -v --import https://yum.tableplus.com/apt.tableplus.com.gpg.key
+dnf config-manager --add-repo https://yum.tableplus.com/rpm/x86_64/tableplus.repo
+dnf -y install tableplus
+
 echo "${color}Install some app...${reset}"
-dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger gnome-tweaks
-flatpak -y install flathub com.spotify.Client 
-flatpak -y install flathub tv.plex.PlexDesktop 
+dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger gnome-tweaks xkill
+flatpak -y install flathub com.spotify.Client
+flatpak -y install flathub com.getpostman.Postman 
+flatpak -y install flathub tv.plex.PlexDesktop
 flatpak -y install flathub org.videolan.VLC
+flatpak install flathub one.ablaze.floorp
 
 echo "${color}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop 

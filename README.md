@@ -6,5 +6,5 @@
 [Gnome 4x UI Improvements](https://extensions.gnome.org/extension/4158/gnome-40-ui-improvements/)\
 [User Avatar In Quick Settings](https://extensions.gnome.org/extension/5506/user-avatar-in-quick-settings/)\
 [Vitals](https://extensions.gnome.org/extension/1460/vitals/)\
-[User Themes](https://extensions.gnome.org/extension/19/user-themes/)/
+[User Themes](https://extensions.gnome.org/extension/19/user-themes/)\
 [PiP on top](https://extensions.gnome.org/extension/4691/pip-on-top/)

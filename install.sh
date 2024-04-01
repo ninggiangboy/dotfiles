@@ -36,16 +36,13 @@ systemctl start docker
 systemctl enable docker
 systemctl restart docker
 usermod -a -G docker $USER
-chmod 777 /var/run/docker.sock
+newgrp docker
 
 echo "${color}Install VSCode...${reset}"
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 dnf check-update 
 dnf -y install code 
-
-echo "${color}Install .Net...${reset}"
-dnf -y install dotnet-sdk-7.0 
 
 echo "${color}Install kitty...${reset}"
 dnf -y install kitty 
@@ -69,12 +66,20 @@ dnf config-manager --add-repo https://yum.tableplus.com/rpm/x86_64/tableplus.rep
 dnf -y install tableplus
 
 echo "${color}Install some app...${reset}"
-dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger gnome-tweaks xkill
+dnf -y install neofetch btop cava cmatrix cbonsai jetbrains-mono-fonts-all ranger gnome-tweaks xkill util-linux-user
 flatpak -y install flathub com.spotify.Client
 flatpak -y install flathub com.getpostman.Postman 
 flatpak -y install flathub tv.plex.PlexDesktop
 flatpak -y install flathub org.videolan.VLC
 flatpak install flathub one.ablaze.floorp
+
+echo "${color}Install Postman Proxy...${reset}"
+cd ~/.var/app/com.getpostman.Postman/config/Postman/proxy
+openssl req -subj '/C=US/CN=Postman Proxy' -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -keyout postman-proxy-ca.key -out postman-proxy-ca.crt
+
+echo "${color}Install Nodejs...${reset}"
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+pnpm env use --global lts
 
 echo "${color}Install Pop Shell...${reset}"
 dnf -y install gnome-shell-extension-pop-shell xprop 
